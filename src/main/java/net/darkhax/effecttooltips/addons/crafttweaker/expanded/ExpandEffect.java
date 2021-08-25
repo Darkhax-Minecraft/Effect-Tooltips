@@ -28,7 +28,7 @@ public class ExpandEffect {
     }
     
     @ZenCodeType.Method
-    public static Effect addTooltipTail (Effect self, MCTextComponent tooltipEntry) {
+    public static Effect addTooltipFooter (Effect self, MCTextComponent tooltipEntry) {
         
         return addTooltip(self, EventPriority.LOW, tooltipEntry);
     }
@@ -39,7 +39,7 @@ public class ExpandEffect {
             
             CTEventManager.register(SpecificEffect.class, priority, e -> {
                 
-                if (e.getEffect().getEffect() == effect) {
+                if (e.getEffectInstance().getEffect() == effect) {
                     
                     e.getTooltips().add(tooltipEntry.getInternal());
                 }
