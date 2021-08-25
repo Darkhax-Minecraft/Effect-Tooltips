@@ -55,7 +55,7 @@ public class EffectTooltipEvent extends PlayerEvent {
             this.effect = effect;
         }
         
-        public EffectInstance getEffect () {
+        public EffectInstance getEffectInstance () {
             
             return this.effect;
         }

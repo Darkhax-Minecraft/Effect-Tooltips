@@ -35,9 +35,9 @@ public final class EffectTooltips {
     public static void onEffectTooltipHigh (EffectTooltipEvent.SpecificEffect event) {
         
         // Adds the name of the effect and the remaining duration to the top of the tooltip.
-        final ITextComponent name = new TranslationTextComponent(event.getEffect().getDescriptionId());
-        final ITextComponent level = new TranslationTextComponent("enchantment.level." + (event.getEffect().getAmplifier() + 1));
-        final ITextComponent duration = new StringTextComponent(EffectUtils.formatDuration(event.getEffect(), 1.0F));
+        final ITextComponent name = new TranslationTextComponent(event.getEffectInstance().getDescriptionId());
+        final ITextComponent level = new TranslationTextComponent("enchantment.level." + (event.getEffectInstance().getAmplifier() + 1));
+        final ITextComponent duration = new StringTextComponent(EffectUtils.formatDuration(event.getEffectInstance(), 1.0F));
         event.getTooltips().add(new TranslationTextComponent("tooltip.effecttooltips.name", name, level, duration));
     }
     
@@ -45,7 +45,7 @@ public final class EffectTooltips {
     public static void onEffectTooltipLow (EffectTooltipEvent.SpecificEffect event) {
         
         // Adds the name of the mod that added the effect to the bottom of the tooltip.
-        final String modId = event.getEffect().getEffect().getRegistryName().getNamespace();
+        final String modId = event.getEffectInstance().getEffect().getRegistryName().getNamespace();
         final ITextComponent modName = new StringTextComponent(ModList.get().getModContainerById(modId).map(modContainer -> modContainer.getModInfo().getDisplayName()).orElse(StringUtils.capitalize(modId))).withStyle(TextFormatting.BLUE);
         event.getTooltips().add(modName);
         
@@ -53,7 +53,7 @@ public final class EffectTooltips {
         // the tooltip.
         if (event.getTooltipFlags().isAdvanced()) {
             
-            event.getTooltips().add(new StringTextComponent(event.getEffect().getEffect().getRegistryName().toString()).withStyle(TextFormatting.DARK_GRAY));
+            event.getTooltips().add(new StringTextComponent(event.getEffectInstance().getEffect().getRegistryName().toString()).withStyle(TextFormatting.DARK_GRAY));
         }
     }
 }
