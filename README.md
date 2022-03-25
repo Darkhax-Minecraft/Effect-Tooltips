@@ -1,24 +1,29 @@
 # [Effect Tooltips](https://www.curseforge.com/minecraft/mc-mods/effect-tooltips)
-This mod adds a tooltip to status effects displayed in the player inventory. The tooltip contains useful information about the effect such as the name of the mod that added it to the game. The mod also provides an event based API that allows other mods to add new tooltip entries or modify the tooltip in other ways.
+This mod adds a tooltip to status effects displayed on the player inventory screen. This tooltip can contain useful information about the status effect such as the name of the mod that added the effect to the game. This mod also provides a flexible API that allows other mods to add new tooltip entries or modify other aspects of the tooltip.
 
-## Provided Information
+## Tooltip Information
 - The name of the effect.
-- The level/amplifier of the effect.
-- The remaining duration of the effect.
-- The name of the mod that added the effect.
-- The registry ID of the effect (Only when f3+H debug mode is enabled)
+- The level/tier of the effect.
+- The name of the mod that added the affect.
+- The registry ID of the effect, only shown when debug tooltips (f3 + h) is enabled.
 
 ## Maven Dependency
 If you are using [Gradle](https://gradle.org) to manage your dependencies, add the following into your `build.gradle` file. Make sure to replace the version with the correct one. All versions can be viewed [here](https://maven.mcmoddev.com/net/darkhax/effecttooltips/).
 ```
 repositories {
 
-    maven { url 'https://maven.blamejared.com' }
+    maven { 
+        url 'https://maven.blamejared.com'
+    }
 }
 
 dependencies {
 
-    implementation fg.deobf(group: 'net.darkhax.effecttooltips', name: 'EffectTooltips-Forge-1.16.5', version: '1.0.1')
+    // Forge
+    implementation fg.deobf(group: 'net.darkhax.effecttooltips', name: 'EffectTooltips-Forge-1.18.2', version: '2.0.1')
+    
+    // Fabric
+    modImplementation "net.darkhax.effecttooltips:EffectTooltips-Fabric-1.18.2:2.0.1"
 }
 ```
 
