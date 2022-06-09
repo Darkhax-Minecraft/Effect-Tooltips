@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.player.Inventory;
@@ -98,7 +97,7 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
 
                 // Vanilla tooltip content parity.
                 effectTooltip.add(this.getEffectName(effect));
-                effectTooltip.add(new TextComponent(MobEffectUtil.formatDuration(effect, 1.0F)));
+                effectTooltip.add(Component.translatable(MobEffectUtil.formatDuration(effect, 1.0F)));
 
                 // Post individual effect tooltip.
                 EffectTooltips.EVENTS.postEffectTooltip(effect, effectTooltip, this.compactEffectRendering, flag);
@@ -106,7 +105,7 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
                 // Add a blank line between individual entries.
                 if (!tooltips.isEmpty()) {
 
-                    tooltips.add(new TextComponent(" "));
+                    tooltips.add(Component.translatable(" "));
                 }
 
                 // Add the tooltips for the individual effect.

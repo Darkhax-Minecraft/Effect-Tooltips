@@ -2,8 +2,8 @@ package net.darkhax.effecttooltips.api.event;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class EffectTooltips {
 
                 if (flag.isAdvanced()) {
 
-                    tooltip.add(new TextComponent(effectId.toString()));
+                    tooltip.add(Component.translatable(effectId.toString()));
                 }
             }
         });

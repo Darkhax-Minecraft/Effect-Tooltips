@@ -8,7 +8,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 
 public class EffectTooltipsFabric implements ModInitializer {
 
@@ -38,6 +38,6 @@ public class EffectTooltipsFabric implements ModInitializer {
     @Override
     public void onInitialize() {
 
-        EffectTooltips.init((modId) -> new TextComponent(FabricLoader.getInstance().getModContainer(modId).map(mod -> mod.getMetadata().getName()).orElse(modId)));
+        EffectTooltips.init((modId) -> Component.translatable(FabricLoader.getInstance().getModContainer(modId).map(mod -> mod.getMetadata().getName()).orElse(modId)));
     }
 }
