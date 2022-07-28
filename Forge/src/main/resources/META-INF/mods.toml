@@ -15,3 +15,10 @@ authors="${mod_author}"
 description='''
 ${mod_description}
 '''
+
+[[dependencies.${ mod_id }]]
+modId = "forge"
+mandatory = true
+versionRange = "[41.1.0,)"
+ordering = "NONE"
+side = "BOTH"
