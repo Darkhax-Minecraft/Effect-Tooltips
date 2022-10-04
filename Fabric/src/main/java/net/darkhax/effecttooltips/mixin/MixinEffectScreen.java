@@ -6,11 +6,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.TooltipFlag;
+import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -92,12 +94,14 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
 
             // Build the broader tooltip by posting events for each hovered effect individually.
             for (MobEffectInstance effect : this.hoveredEffects) {
+                MobEffectCategory effectCategory = effect.getEffect().getCategory();
 
                 final List<Component> effectTooltip = new LinkedList<>();
 
                 // Vanilla tooltip content parity.
                 effectTooltip.add(this.getEffectName(effect));
-                effectTooltip.add(Component.literal(MobEffectUtil.formatDuration(effect, 1.0F)));
+                effectTooltip.add(Component.translatable(StringUtils.capitalize(effectCategory.name().toLowerCase())).withStyle(effectCategory.getTooltipFormatting()));
+                effectTooltip.add(Component.translatable(MobEffectUtil.formatDuration(effect, 1.0F)));
 
                 // Post individual effect tooltip.
                 EffectTooltips.EVENTS.postEffectTooltip(effect, effectTooltip, this.compactEffectRendering, flag);
