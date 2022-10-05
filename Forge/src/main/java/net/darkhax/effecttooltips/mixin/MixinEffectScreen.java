@@ -1,6 +1,7 @@
 package net.darkhax.effecttooltips.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.darkhax.effecttooltips.EffectTooltipsCommon;
 import net.darkhax.effecttooltips.api.event.EffectTooltips;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -94,13 +95,17 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
 
             // Build the broader tooltip by posting events for each hovered effect individually.
             for (MobEffectInstance effect : this.hoveredEffects) {
-                MobEffectCategory effectCategory = effect.getEffect().getCategory();
-
                 final List<Component> effectTooltip = new LinkedList<>();
 
                 // Vanilla tooltip content parity.
                 effectTooltip.add(this.getEffectName(effect));
-                effectTooltip.add(Component.translatable(StringUtils.capitalize(effectCategory.name().toLowerCase())).withStyle(effectCategory.getTooltipFormatting()));
+
+                // Show effect category in tooltip if enabled in config
+                if (EffectTooltipsCommon.config.showEffectCategory) {
+                    MobEffectCategory effectCategory = effect.getEffect().getCategory();
+                    effectTooltip.add(Component.translatable(StringUtils.capitalize(effectCategory.name().toLowerCase())).withStyle(effectCategory.getTooltipFormatting()));
+                }
+
                 effectTooltip.add(Component.translatable(MobEffectUtil.formatDuration(effect, 1.0F)));
 
                 // Post individual effect tooltip.
