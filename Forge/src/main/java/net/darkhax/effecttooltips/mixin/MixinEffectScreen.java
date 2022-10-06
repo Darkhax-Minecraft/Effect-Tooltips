@@ -1,16 +1,19 @@
 package net.darkhax.effecttooltips.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.darkhax.effecttooltips.EffectTooltipsCommon;
 import net.darkhax.effecttooltips.api.event.EffectTooltips;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.TooltipFlag;
+import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -92,11 +95,17 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
 
             // Build the broader tooltip by posting events for each hovered effect individually.
             for (MobEffectInstance effect : this.hoveredEffects) {
-
                 final List<Component> effectTooltip = new LinkedList<>();
 
                 // Vanilla tooltip content parity.
                 effectTooltip.add(this.getEffectName(effect));
+
+                // Show effect category in tooltip if enabled in config
+                if (EffectTooltipsCommon.config.showEffectCategory) {
+                    MobEffectCategory effectCategory = effect.getEffect().getCategory();
+                    effectTooltip.add(Component.translatable(StringUtils.capitalize(effectCategory.name().toLowerCase())).withStyle(effectCategory.getTooltipFormatting()));
+                }
+
                 effectTooltip.add(Component.translatable(MobEffectUtil.formatDuration(effect, 1.0F)));
 
                 // Post individual effect tooltip.

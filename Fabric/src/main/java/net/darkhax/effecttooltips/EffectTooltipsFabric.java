@@ -37,6 +37,7 @@ public class EffectTooltipsFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        new EffectTooltipsCommon(FabricLoader.getInstance().getConfigDir());
 
         EffectTooltips.init((modId) -> Component.translatable(FabricLoader.getInstance().getModContainer(modId).map(mod -> mod.getMetadata().getName()).orElse(modId)));
     }
