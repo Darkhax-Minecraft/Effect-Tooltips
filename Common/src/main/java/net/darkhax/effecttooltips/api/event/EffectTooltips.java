@@ -2,6 +2,7 @@ package net.darkhax.effecttooltips.api.event;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +22,7 @@ public class EffectTooltips {
 
         EffectTooltips.EVENTS.addStatusEffectTooltipListener(TooltipLayout.FOOTER, (effect, tooltip, isCompact, flag) -> {
 
-            final ResourceLocation effectId = Registry.MOB_EFFECT.getKey(effect.getEffect());
+            final ResourceLocation effectId = BuiltInRegistries.MOB_EFFECT.getKey(effect.getEffect());
 
             if (effectId != null) {
 
