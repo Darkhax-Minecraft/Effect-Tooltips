@@ -106,7 +106,7 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
                     effectTooltip.add(Component.translatable(StringUtils.capitalize(effectCategory.name().toLowerCase())).withStyle(effectCategory.getTooltipFormatting()));
                 }
 
-                effectTooltip.add(Component.translatable(MobEffectUtil.formatDuration(effect, 1.0F)));
+                effectTooltip.add(MobEffectUtil.formatDuration(effect, 1.0F));
 
                 // Post individual effect tooltip.
                 EffectTooltips.EVENTS.postEffectTooltip(effect, effectTooltip, this.compactEffectRendering, flag);
