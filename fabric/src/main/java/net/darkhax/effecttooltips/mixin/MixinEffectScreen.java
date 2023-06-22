@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.darkhax.effecttooltips.EffectTooltipsCommon;
 import net.darkhax.effecttooltips.api.event.EffectTooltips;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.network.chat.Component;
@@ -52,7 +53,7 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
         throw new IllegalStateException("Mixin failed.");
     }
 
-    @ModifyArg(method = "renderEffects(Lcom/mojang/blaze3d/vertex/PoseStack;II)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/EffectRenderingInventoryScreen;renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;Ljava/util/Optional;II)V"))
+    @ModifyArg(method = "renderEffects(Lnet/minecraft/client/gui/GuiGraphics;II)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;renderTooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;II)V"))
     private List<Component> modifyCompactTooltip(List<Component> value) {
 
         // Vanilla already renders a tooltip when in the compact view. This mixin posts our event and modifies the tooltip entries for their tooltip.
@@ -66,15 +67,15 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
         return entries;
     }
 
-    @Inject(method = "renderEffects(Lcom/mojang/blaze3d/vertex/PoseStack;II)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/EffectRenderingInventoryScreen;renderTooltip(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;Ljava/util/Optional;II)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void cacheVanillaCompactHoverEffect(PoseStack poseStack, int i, int j, CallbackInfo ci, int k, int l, Collection collection, boolean bl, int m, Iterable iterable, int n, MobEffectInstance mobEffectInstance, List list) {
+    @Inject(method = "renderEffects(Lnet/minecraft/client/gui/GuiGraphics;II)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;renderTooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;II)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILHARD)
+    private void cacheVanillaCompactHoverEffect(GuiGraphics graphics, int i, int j, CallbackInfo ci, int k, int l, Collection collection, boolean bl, int m, Iterable iterable, int n, MobEffectInstance mobEffectInstance, List list) {
 
         // Cache the hovered effect used by the vanilla compact tooltip.
         vanillaCompactEffect = mobEffectInstance;
     }
 
-    @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V", at = @At("HEAD"))
-    private void onRenderHead(PoseStack stack, int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
+    @Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("HEAD"))
+    private void onRenderHead(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
 
         // Cache the mouse position to avoid calculating it later.
         this.mouseX = mouseX;
@@ -84,8 +85,8 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
         this.hoveredEffects.clear();
     }
 
-    @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V", at = @At("RETURN"))
-    private void onRenderReturn(PoseStack stack, int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
+    @Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("RETURN"))
+    private void onRenderReturn(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
 
         // Adds a new tooltip to the non-compact view of this GUI if there are some effects being hovered. Vanilla already renders a tooltip for the compact view.
         if (!this.hoveredEffects.isEmpty() && !this.compactEffectRendering) {
@@ -129,13 +130,13 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
 
             if (!tooltips.isEmpty()) {
 
-                this.renderTooltip(stack, tooltips, Optional.empty(), mouseX, mouseY);
+                graphics.renderTooltip(this.font, tooltips, Optional.empty(), mouseX, mouseY);
             }
         }
     }
 
-    @Inject(method = "renderBackgrounds(Lcom/mojang/blaze3d/vertex/PoseStack;IILjava/lang/Iterable;Z)V", at = @At("RETURN"))
-    private void renderBackgrounds(PoseStack stack, int xPos, int yOffset, Iterable<MobEffectInstance> effects, boolean isExpanded, CallbackInfo ci) {
+    @Inject(method = "renderBackgrounds(Lnet/minecraft/client/gui/GuiGraphics;IILjava/lang/Iterable;Z)V", at = @At("RETURN"))
+    private void renderBackgrounds(GuiGraphics graphics, int xPos, int yOffset, Iterable<MobEffectInstance> effects, boolean isExpanded, CallbackInfo ci) {
 
         // Detect if the effects are rendering in compact mode
         this.compactEffectRendering = !isExpanded;
