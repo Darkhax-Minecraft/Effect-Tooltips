@@ -21,9 +21,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -66,11 +64,12 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
         return entries;
     }
 
-    @Inject(method = "renderEffects(Lnet/minecraft/client/gui/GuiGraphics;II)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;renderTooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;II)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void cacheVanillaCompactHoverEffect(GuiGraphics graphics, int i, int j, CallbackInfo ci, int k, int l, Collection collection, boolean bl, int m, Iterable iterable, int n, MobEffectInstance mobEffectInstance, List list) {
+    @ModifyArg(method = "renderEffects(Lnet/minecraft/client/gui/GuiGraphics;II)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/EffectRenderingInventoryScreen;getEffectName(Lnet/minecraft/world/effect/MobEffectInstance;)Lnet/minecraft/network/chat/Component;"))
+    private MobEffectInstance cacheVanillaCompactHoverEffect(MobEffectInstance effect) {
 
-        // Cache the hovered effect used by the vanilla compact tooltip.
-        vanillaCompactEffect = mobEffectInstance;
+        // Capture which effect is hovered for vanilla's compact tooltip. Forge patches this method and does weird things to the LVT so normal local capture fails.
+        this.vanillaCompactEffect = effect;
+        return effect;
     }
 
     @Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("HEAD"))
@@ -82,6 +81,7 @@ public abstract class MixinEffectScreen extends AbstractContainerScreen {
 
         // Reset the hovered effect cache.
         this.hoveredEffects.clear();
+        this.vanillaCompactEffect = null;
     }
 
     @Inject(method = "render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", at = @At("RETURN"))

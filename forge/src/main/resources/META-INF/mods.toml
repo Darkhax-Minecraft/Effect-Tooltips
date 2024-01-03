@@ -21,6 +21,6 @@ ${mod_description}
 [[dependencies.${ mod_id }]]
 modId = "forge"
 mandatory = true
-versionRange = "[47,)"
+versionRange = "${forge_version_range}"
 ordering = "NONE"
 side = "BOTH"
