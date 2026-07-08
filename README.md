@@ -1,38 +1,42 @@
-# [Effect Tooltips](https://www.curseforge.com/minecraft/mc-mods/effect-tooltips)
-This mod adds a tooltip to status effects displayed on the player inventory screen. This tooltip can contain useful information about the status effect such as the name of the mod that added the effect to the game. This mod also provides a flexible API that allows other mods to add new tooltip entries or modify other aspects of the tooltip.
+<!-- name-start -->
+# EffectTooltips [![CurseForge Project](https://img.shields.io/curseforge/dt/520367?logo=curseforge&label=CurseForge&style=flat-square&labelColor=2D2D2D&color=555555)](https://www.curseforge.com/minecraft/mc-mods/effect-tooltips) [![Modrinth Project](https://img.shields.io/modrinth/dt/qc0LobOe?logo=modrinth&label=Modrinth&style=flat-square&labelColor=2D2D2D&color=555555)](https://modrinth.com/mod/effect-tooltips) [![Maven Project](https://img.shields.io/maven-metadata/v?style=flat-square&logoColor=D31A38&labelColor=2D2D2D&color=555555&label=Latest&logo=gradle&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fnet%2Fdarkhax%2Feffecttooltips%2Feffecttooltips-common-26.1.2%2Fmaven-metadata.xml)](https://maven.blamejared.com/net/darkhax/effecttooltips)
+<!-- name-end -->
 
-## Tooltip Information
-- The name of the effect.
-- The level/tier of the effect.
-- The name of the mod that added the affect.
-- The registry ID of the effect, only shown when debug tooltips (f3 + h) is enabled.
+<!-- description-start -->
+This is the official GitHub repo for the EffectTooltips mod. Adds tooltips when you hover over status effects. You can download this mod from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/effect-tooltips) or [Modrinth](https://modrinth.com/mod/effect-tooltips). Please report issues [here](https://github.com/Darkhax-Minecraft/Effect-Tooltips/issues).
+<!-- description-end -->
 
+<!-- maven-start -->
 ## Maven Dependency
-If you are using [Gradle](https://gradle.org) to manage your dependencies, add the following into your `build.gradle` file. Make sure to replace the version with the correct one. All versions can be viewed [here](https://maven.mcmoddev.com/net/darkhax/effecttooltips/).
-```
-repositories {
+This project is available on the [BlameJared Maven](https://maven.blamejared.com).
 
-    maven { 
+If you are using [Gradle](https://gradle.org) you can add the mod as a dependency by adding the following
+to your `build.gradle` file.
+
+```groovy
+repositories {
+    maven {
         url 'https://maven.blamejared.com'
     }
 }
 
 dependencies {
-
-    // Forge
-    implementation fg.deobf(group: 'net.darkhax.effecttooltips', name: 'EffectTooltips-Forge-1.18.2', version: '2.0.1')
-    
-    // Fabric
-    modImplementation "net.darkhax.effecttooltips:EffectTooltips-Fabric-1.18.2:2.0.1"
+     // NeoForge
+     implementation group: 'net.darkhax.effecttooltips', name: 'effecttooltips-neoforge-26.1.2', version: '26.1.2.0'
+     // Fabric
+     implementation group: 'net.darkhax.effecttooltips', name: 'effecttooltips-fabric-26.1.2', version: '26.1.2.0'
+     // Common / MultiLoader / Vanilla / No Loader
+     implementation group: 'net.darkhax.effecttooltips', name: 'effecttooltips-common-26.1.2', version: '26.1.2.0'
 }
 ```
 
-## Jar Signing
+<!-- maven-end -->
 
-As of January 11th 2021 officially published builds will be signed. You can validate the integrity of these builds by comparing their signatures with the public fingerprints.
+<!-- sponsor-start -->
+## Sponsors
+[![](https://assets.blamejared.com/nodecraft/darkhax.jpg)](https://nodecraft.com/r/darkhax)    
+EffectTooltips is proudly sponsored by Nodecraft! Play your favorite games with your friends using their high
+performance game servers! Use code **[DARKHAX](https://nodecraft.com/r/darkhax)** for 30% off your first
+month of service!
 
-| Hash   | Fingerprint                                                        |
-|--------|--------------------------------------------------------------------|
-| MD5    | `12F89108EF8DCC223D6723275E87208F`                                 |
-| SHA1   | `46D93AD2DC8ADED38A606D3C36A80CB33EFA69D1`                         |
-| SHA256 | `EBC4B1678BF90CDBDC4F01B18E6164394C10850BA6C4C748F0FA95F2CB083AE5` |
+<!-- sponsor-end -->

@@ -1,0 +1,23 @@
+{
+  "mod": {
+    "name": "EffectTooltips",
+    "group": "net.darkhax.effecttooltips",
+    "authors": [
+      "Darkhax"
+    ],
+    "id": "effecttooltips",
+    "license": "LGPL v2.1",
+    "description": "Adds tooltips when you hover over status effects.",
+    "repo": "https://github.com/Darkhax-Minecraft/Effect-Tooltips",
+    "client": false
+  },
+  "curseforge": {
+    "slug": "effect-tooltips",
+    "id": "520367"
+  },
+  "modrinth": {
+    "slug": "effect-tooltips",
+    "id": "qc0LobOe"
+  },
+  "dependencies": []
+}

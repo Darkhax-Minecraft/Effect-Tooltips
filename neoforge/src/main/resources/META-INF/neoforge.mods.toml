@@ -1,0 +1,36 @@
+modLoader = "javafml"
+license = "LGPL v2.1"
+issueTrackerURL = "https://github.com/Darkhax-Minecraft/Effect-Tooltips/issues"
+
+[[mods]]
+modId = "effecttooltips"
+version = "26.1.2.0"
+displayName = "EffectTooltips"
+updateJSONURL = "https://updates.blamejared.com/get?n=effecttooltips&gv=26.1.2&ml=neoforge"
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/effect-tooltips"
+logoFile = "logo_effecttooltips.png"
+logoBlur = false
+credits = "This project is made possible with Patreon support from players like you. Thank you! lothrazar, techsquirrel, Tobias Ward, noobanidus"
+authors = "Darkhax"
+description = "Adds tooltips when you hover over status effects."
+
+[[mixins]]
+config = "effecttooltips.common.mixins.json"
+
+[[mixins]]
+config = "effecttooltips.neoforge.mixins.json"
+
+[[dependencies.effecttooltips]]
+modId = "minecraft"
+type = "required"
+versionRange = "26.1"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.effecttooltips]]
+modId = "neoforge"
+type = "required"
+versionRange = "[26.1.0.1-beta,)"
+ordering = "NONE"
+side = "BOTH"
+
