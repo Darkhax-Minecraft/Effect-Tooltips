@@ -1,5 +1,5 @@
 <!-- name-start -->
-# EffectTooltips [![CurseForge Project](https://img.shields.io/curseforge/dt/520367?logo=curseforge&label=CurseForge&style=flat-square&labelColor=2D2D2D&color=555555)](https://www.curseforge.com/minecraft/mc-mods/effect-tooltips) [![Modrinth Project](https://img.shields.io/modrinth/dt/qc0LobOe?logo=modrinth&label=Modrinth&style=flat-square&labelColor=2D2D2D&color=555555)](https://modrinth.com/mod/effect-tooltips) [![Maven Project](https://img.shields.io/maven-metadata/v?style=flat-square&logoColor=D31A38&labelColor=2D2D2D&color=555555&label=Latest&logo=gradle&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fnet%2Fdarkhax%2Feffecttooltips%2Feffecttooltips-common-26.1.2%2Fmaven-metadata.xml)](https://maven.blamejared.com/net/darkhax/effecttooltips)
+# EffectTooltips [![CurseForge Project](https://img.shields.io/curseforge/dt/520367?logo=curseforge&label=CurseForge&style=flat-square&labelColor=2D2D2D&color=555555)](https://www.curseforge.com/minecraft/mc-mods/effect-tooltips) [![Modrinth Project](https://img.shields.io/modrinth/dt/qc0LobOe?logo=modrinth&label=Modrinth&style=flat-square&labelColor=2D2D2D&color=555555)](https://modrinth.com/mod/effect-tooltips) [![Maven Project](https://img.shields.io/maven-metadata/v?style=flat-square&logoColor=D31A38&labelColor=2D2D2D&color=555555&label=Latest&logo=gradle&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fnet%2Fdarkhax%2Feffecttooltips%2Feffecttooltips-common-26.2%2Fmaven-metadata.xml)](https://maven.blamejared.com/net/darkhax/effecttooltips)
 <!-- name-end -->
 
 <!-- description-start -->
@@ -22,11 +22,11 @@ repositories {
 
 dependencies {
      // NeoForge
-     implementation group: 'net.darkhax.effecttooltips', name: 'effecttooltips-neoforge-26.1.2', version: '26.1.2.0'
+     implementation group: 'net.darkhax.effecttooltips', name: 'effecttooltips-neoforge-26.2', version: '26.2.0.0'
      // Fabric
-     implementation group: 'net.darkhax.effecttooltips', name: 'effecttooltips-fabric-26.1.2', version: '26.1.2.0'
+     implementation group: 'net.darkhax.effecttooltips', name: 'effecttooltips-fabric-26.2', version: '26.2.0.0'
      // Common / MultiLoader / Vanilla / No Loader
-     implementation group: 'net.darkhax.effecttooltips', name: 'effecttooltips-common-26.1.2', version: '26.1.2.0'
+     implementation group: 'net.darkhax.effecttooltips', name: 'effecttooltips-common-26.2', version: '26.2.0.0'
 }
 ```
 
